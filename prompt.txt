@@ -1,0 +1,15 @@
+Crée une page HTML unique (index.html) en HTML/CSS/JS vanilla, sans framework ni build tool. Contraintes :
+
+Une carte de pricing avec : titre, prix, liste de features (optionnelle), bouton "Start Trial".
+Le style doit reprendre : conteneur .pricing centré à 300px de large, fond blanc, 
+           box-shadow: 0 0 10px #ccc, coins arrondis (8px) ; .price en vert ; .btn en bleu 
+           avec :hover en bleu foncé.
+Extrait la carte dans une fonction JS réutilisable Card({ title, price, features }) qui construit 
+      et retourne un HTMLElement (pas de innerHTML avec des strings concaténées — 
+      utilise createElement/textContent).
+Gère le cas où features est vide ou undefined : ne pas planter, ne pas afficher de <ul> vide.
+Stocke les données des plans dans un tableau plans = [...] 
+      et génère toutes les cartes en bouclant dessus (container.appendChild(Card(plan))), 
+      avec un conteneur .pricing-container en display: flex pour aligner plusieurs cartes côte à côte.
+Inclue les meta tags charset UTF-8 et viewport dans le <head>.
+Un seul fichier, tout inline (<style> et <script> dans le HTML).

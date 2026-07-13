@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .pricing-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pricing {
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #ccc;
+    padding: 10px;
+    text-align: left;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .price {
+    font-size: 18px;
+    color: green;
+  }
+  .features {
+    list-style: none;
+    padding-left: 0;
+  }
+  .features li {
+    padding: 4px;
+    border-bottom: 1px solid #eee;
+  }
+  .btn {
+    background: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .btn:hover {
+    background: darkblue;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Les cartes sont générées dynamiquement par JS dans ce conteneur -->
+  <div class="pricing-container" id="pricing-container"></div>
+
+  <script>
+    /**
+     * Card — génère le DOM d'une carte de pricing.
+     * @param {Object} props
+     * @param {string} props.title
+     * @param {number|string} props.price
+     * @param {string[]} [props.features]
+     * @returns {HTMLElement}
+     */
+    function Card({ title, price, features = [] }) {
+      const displayPrice = typeof price === 'number' ? `$${price.toFixed(2)} /month` : price;
+
+      const card = document.createElement('div');
+      card.className = 'pricing';
+
+      const titleEl = document.createElement('h2');
+      titleEl.className = 'title';
+      titleEl.textContent = title;
+
+      const priceEl = document.createElement('p');
+      priceEl.className = 'price';
+      priceEl.textContent = displayPrice;
+
+      card.appendChild(titleEl);
+      card.appendChild(priceEl);
+
+      if (features && features.length > 0) {
+        const list = document.createElement('ul');
+        list.className = 'features';
+        features.forEach((feature) => {
+          const li = document.createElement('li');
+          li.textContent = feature;
+          list.appendChild(li);
+        });
+        card.appendChild(list);
+      }
+
+      const btn = document.createElement('button');
+      btn.className = 'btn';
+      btn.textContent = 'Start Trial';
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    // Données des plans — ajoute/retire des objets pour ajouter des cartes
+    const plans = [
+      {
+        title: 'Basic Plan',
+        price: 9.99,
+        features: ['1 GB Storage', 'Basic Support', 'All Core Features'],
+      },
+    ];
+
+    const container = document.getElementById('pricing-container');
+    plans.forEach((plan) => container.appendChild(Card(plan)));
+  </script>
+
+</body>
+</html>
